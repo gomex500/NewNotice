@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native'
 import axios from "axios";
 
-const NewsList = () =>{
+const NewsList = ({navigation}) =>{
     const [news, setNews] = useState([]);
 
     useEffect(() =>{
@@ -26,18 +26,18 @@ const NewsList = () =>{
     return(
         <View style={styles.container}>
             <FlatList
-            data={news}
-            renderItem={({item}) =>(
-                <TouchableOpacity
-                    style={styles.newsItem}
-                    key={item.id}
-                    onPress={() => navigation.navigate('NewsDetail', { newsItem: item })}
-                >
-                    <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.description}>{item.description}</Text>
-                </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.id?.toString()}
+                data={news}
+                renderItem={({item}) =>(
+                    <TouchableOpacity
+                        style={styles.newsItem}
+                        key={item.id}
+                        onPress={() => navigation.navigate('NewsDetail', { newsItem: item })}
+                    >
+                        <Text style={styles.title}>{item.title}</Text>
+                        <Text style={styles.description}>{item.description}</Text>
+                    </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.id?.toString()}
             />
         </View>
     );
@@ -54,9 +54,11 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
+        color: '#000000',
     },
     description: {
         fontSize: 14,
+        color: '#000000',
     },
 });
 
